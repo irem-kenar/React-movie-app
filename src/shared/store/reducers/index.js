@@ -4,7 +4,7 @@ import { combineReducers } from "redux";
 
 // add reducers below
 const rootReducer = combineReducers({
-    movies: movieReducer,
+    movie: movieReducer,
 });
 
 export default rootReducer;

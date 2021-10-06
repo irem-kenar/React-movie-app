@@ -10,6 +10,9 @@ function* loadMovie(action) {
             yield put(movieActions.loadMovieApiFailAction());
         } else {
             yield put(movieActions.loadMovieApiSuccessAction(response.data));
+            console.log(response.data);
+            console.log(response.items)
+            console.log(response)
         }
     } catch (error) {
         yield put(movieActions.loadMovieApiFailAction());

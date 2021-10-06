@@ -22,6 +22,7 @@ const movieReducer = (state = INITIAL_STATE, action) => {
                 loading: false,
                 loaded: true,
                 loadFail: false,
+                data: action.payload,
             };
         case movieConstant.LOAD_MOVIE_API_FAIL:
             return {
@@ -29,7 +30,6 @@ const movieReducer = (state = INITIAL_STATE, action) => {
                 loading: false,
                 loaded: false,
                 loadFail: true,
-                data: action.payload,
             }
         default:
             return {

@@ -16,9 +16,13 @@ const Homepage = () => {
     return (
         <>
             <button onClick={loadMovie}>Show me the movies</button>
-            {movieLoaded ? (
-                <div>movie rank:{movieData.items[0].rank}</div>
-            ) : <></>}
+            {movieLoaded ? movieData.items.map(movie => (<>
+                <div>{movie.rank}</div>
+                <div>{movie.title} ({movie.year}) </div>
+                <img src={movie.image} alt=""></img>
+                <div>{movie.crew} </div>
+                <div>{movie.imDbRating} </div>
+            </>)) : <></>}
         </>
     )
 }

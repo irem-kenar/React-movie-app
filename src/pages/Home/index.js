@@ -20,19 +20,6 @@ const Homepage = () => {
         dispatch(movieActions.loadMovieApiAction());
     }
 
-    // return (
-    //     <>
-    //         <button onClick={loadMovie}>Show me the movies</button>
-    //         {movieLoaded ?
-    //             movieData.items.map(movie => (<>
-    //                 <div>{movie.rank}</div>
-    //                 <div>{movie.title} ({movie.year}) </div>
-    //                 <img src={movie.image} alt=""></img>
-    //                 <div>{movie.crew} </div>
-    //                 <div>{movie.imDbRating} </div>
-    //             </>)) : <></>}
-    //     </>
-    // )
     return (
         <>
             <button onClick={loadMovie}>Show me the movies</button>
@@ -40,8 +27,8 @@ const Homepage = () => {
                 <TableContainer component={Paper}>
                     <Table align="center" sx={{ minWidth: 650, maxWidth: 800 }} aria-label="simple table">
                         <TableHead>
-                            <TableRow sx={{ backgroundColor: "#2bbbad", height: "60px" }}>
-                                <TableCell>Rank</TableCell>
+                            <TableRow sx={{ backgroundColor: "#2bbbad", height: "60px", '&:nth-child(1) th': { fontFamily: "Exo2,Tahoma,Arial", color: "#fff", fontWeight: "800", textTransform: "uppercase" } }}>
+                                <TableCell align="center">Rank</TableCell>
                                 <TableCell align="center">Image</TableCell>
                                 <TableCell align="center">Title</TableCell>
                                 <TableCell align="center">Year</TableCell>
@@ -53,12 +40,12 @@ const Homepage = () => {
                             {movieData.items.map((movie) => (
                                 <TableRow
                                     key={movie.rank}
-                                    sx={{ '&:last-child td, &:last-child th': { border: 0 }, '&:nth-of-type(odd)': { backgroundColor: "rgba(0,0,0,.05)" } }}
+                                    sx={{ '&:last-child td, &:last-child th': { border: 0 }, '&:nth-of-type(odd)': { backgroundColor: "rgba(0,0,0,.05)" }, '&:nth-child(1) td': { fontFamily: "Exo2,Tahoma,Arial", '&:hover:td': { backgroundColor: 'red' } } }}
                                 >
                                     <TableCell component="th" scope="row">
                                         {movie.rank}
                                     </TableCell>
-                                    <TableCell align="center"><img style={{ maxWidth: "40%", height: "auto", borderRadius: ".25rem" }} src={movie.image} alt=""></img></TableCell>
+                                    <TableCell align="center"><img style={{ maxWidth: "100%", height: "auto", borderRadius: ".25rem" }} src={movie.image} alt=""></img></TableCell>
                                     <TableCell align="center">{movie.title}</TableCell>
                                     <TableCell align="center">{movie.year}</TableCell>
                                     <TableCell align="center">{movie.crew}</TableCell>

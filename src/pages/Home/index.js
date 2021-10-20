@@ -40,15 +40,15 @@ const Homepage = () => {
                             {movieData.items.map((movie) => (
                                 <TableRow
                                     key={movie.rank}
-                                    sx={{ '&:last-child td, &:last-child th': { border: 0 }, '&:nth-of-type(odd)': { backgroundColor: "rgba(0,0,0,.05)" }, '&:nth-child(1) td': { fontFamily: "Exo2,Tahoma,Arial", '&:hover:td': { backgroundColor: 'red' } } }}
+                                    sx={{ '&:last-child td, &:last-child th': { border: 0 }, '&:nth-of-type(odd)': { backgroundColor: "rgba(0,0,0,.05)" }, '& td': { fontFamily: "Exo2, sans-serif" }, '&:hover': { backgroundColor: '#e5e5e5', transition: '0.5s ease-out' } }}
                                 >
                                     <TableCell component="th" scope="row">
                                         {movie.rank}
                                     </TableCell>
                                     <TableCell align="center"><img style={{ maxWidth: "100%", height: "auto", borderRadius: ".25rem" }} src={movie.image} alt=""></img></TableCell>
-                                    <TableCell align="center">{movie.title}</TableCell>
+                                    <TableCell align="center" sx={{ fontWeight: 'bold' }} >{movie.title}</TableCell>
                                     <TableCell align="center">{movie.year}</TableCell>
-                                    <TableCell align="center">{movie.crew}</TableCell>
+                                    <TableCell align="center" sx={{ fontWeight: 'light' }}>{movie.crew}</TableCell>
                                     <TableCell align="center">{movie.imDbRating}</TableCell>
                                 </TableRow>
                             ))}

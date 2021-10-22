@@ -1,4 +1,5 @@
 import Homepage from './pages/Home';
+import MovieDetail from './pages/MovieDetail';
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './App.css';
@@ -12,6 +13,7 @@ function App() {
         <div className="App">
           <Switch>
             <Route path="/" exact component={Homepage} />
+            <Route path="/moviedetail" component={MovieDetail} />
           </Switch>
         </div>
       </Router>

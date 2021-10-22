@@ -10,18 +10,15 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import StarRateRoundedIcon from '@mui/icons-material/StarRateRounded';
-import { Box } from "@mui/material";
-import { CardMedia } from "@mui/material";
-import { Card } from "@mui/material";
-import { CardContent } from "@mui/material";
-import { Typography } from "@mui/material";
+import { CardMedia, CardContent, Card, Typography, Box } from "@mui/material";
+import { Link } from "react-router-dom";
+
 
 
 const Homepage = () => {
     const dispatch = useDispatch();
     const movieData = useSelector(getMovieDataSelector);
     const movieLoaded = useSelector(getMovieLoadedSelector);
-    console.log(movieLoaded);
 
     const loadMovie = () => {
         dispatch(movieActions.loadMovieApiAction());
@@ -80,7 +77,9 @@ const Homepage = () => {
                                             sx={{ '&': { maxWidth: "100%", height: "auto", borderRadius: ".25rem", borderBox: 'box-sizing', objectFit: 'contain', transition: 'all 0.3s linear' }, '&:hover': { transform: 'scale(1.1)' } }}
                                         ></CardMedia>
                                     </TableCell>
-                                    <TableCell align="center" sx={{ fontWeight: 'bold' }} >{movie.title}</TableCell>
+                                    <Link to={`/movieDetail/${movie.rank}`}>
+                                        <TableCell align="center" sx={{ fontWeight: 'bold' }} >{movie.title}</TableCell>
+                                    </Link>
                                     <TableCell align="center">{movie.year}</TableCell>
                                     <TableCell align="center" sx={{ fontWeight: 'light' }}>{movie.crew}</TableCell>
                                     <TableCell alidn='center' >

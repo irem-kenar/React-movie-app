@@ -4,6 +4,7 @@ import { movieActions } from "../../shared/store/actions/movie.action";
 import { getMovieDataSelector, getMovieLoadedSelector } from "../../shared/store/selectors/movie.selector";
 import { CardMedia, CardContent, Card, Typography, } from "@mui/material";
 
+
 const MovieDetail = (props) => {
     useEffect(() => {
         loadMovie();
@@ -16,10 +17,20 @@ const MovieDetail = (props) => {
         dispatch(movieActions.loadMovieApiAction());
     }
 
+    const getMovieTitle = (props) => {
+        return (movieData.items.filter(movie => movie.rank === props.match.params.id)[0])
+    }
+
+    const movie = getMovieTitle(props);
+
     return (
+
         <>
+
             {movieLoaded ? <>
-                <Card sx={{ width: '80%', margin: 'auto', mb: '1.5rem', position: 'relative' }}>
+
+                < Card sx={{ width: '80%', margin: 'auto', mb: '1.5rem', position: 'relative' }
+                }>
                     <CardMedia
                         component='img'
                         image='https://images.unsplash.com/photo-1478720568477-152d9b164e26?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2340&q=80'
@@ -30,17 +41,19 @@ const MovieDetail = (props) => {
                         <Typography variant="h1" sx={{
                             fontFamily: "'Exo 2', 'sans-serif'",
                             fontWeight: '800',
-                            fontSize: '3.5rem',
+                            fontSize: '2.5rem',
                             background: "-webkit-linear-gradient(45deg, #FFF 50%, #000 55%)",
                             WebkitBackgroundClip: "text",
                             WebkitTextFillColor: "transparent"
                         }}>
-                            movie name will be here
+                            {movie.title}
                         </Typography>
                     </CardContent>
-                </Card>
+                </Card >
+
             </> : <></>
             }
+
         </>
     );
 }

@@ -77,7 +77,7 @@ const Homepage = () => {
                                             sx={{ '&': { maxWidth: "100%", height: "auto", borderRadius: ".25rem", borderBox: 'box-sizing', objectFit: 'contain', transition: 'all 0.3s linear' }, '&:hover': { transform: 'scale(1.1)' } }}
                                         ></CardMedia>
                                     </TableCell>
-                                    <Link to={`/movieDetail/${movie.rank}`}>
+                                    <Link to={`/MovieDetail/${movie.rank}`}>
                                         <TableCell align="center" sx={{ fontWeight: 'bold' }} >{movie.title}</TableCell>
                                     </Link>
                                     <TableCell align="center">{movie.year}</TableCell>

@@ -3,6 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { movieActions } from "../../shared/store/actions/movie.action";
 import { getMovieDataSelector, getMovieLoadedSelector } from "../../shared/store/selectors/movie.selector";
 import { CardMedia, CardContent, Card, Typography, } from "@mui/material";
+import Grid from '@mui/material/Grid';
+import { Box } from "@mui/material";
+
 
 
 const MovieDetail = (props) => {
@@ -18,42 +21,103 @@ const MovieDetail = (props) => {
     }
 
     const getMovieTitle = (props) => {
-        return (movieData.items.filter(movie => movie.rank === props.match.params.id)[0])
+        return (movieData ? movieData.items.filter(movie => movie.rank === props.match.params.id)[0] : "")
     }
 
     const movie = getMovieTitle(props);
+    const cardStyles = {
+        width: "146px",
+        height: "146px",
+        backgroundColor: "#2bbbad",
+        borderRadius: ".125rem",
+        boxShadow: "0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%)",
+        margin: "0.375rem",
+        "&:hover": { boxShadow: "0 5px 11px 0 rgb(0 0 0 / 18%), 0 4px 15px 0 rgb(0 0 0 / 15%)" },
+    }
+
+    const typographyStyles = {
+        fontFamily: "'Exo 2', 'sans-serif'",
+        fontWeight: "bold",
+        color: "#fff",
+    }
+
+    const iconStyles = {
+        background: "url(https://imdb-api.com/img/icons/movie-nav-icons.png) no-repeat",
+        height: '50px',
+        width: '50px',
+        display: "inline-block",
+        mt: "1.5rem"
+    }
 
     return (
 
         <>
-
             {movieLoaded ? <>
-
-                < Card sx={{ width: '80%', margin: 'auto', mb: '1.5rem', position: 'relative' }
-                }>
-                    <CardMedia
-                        component='img'
-                        image='https://images.unsplash.com/photo-1478720568477-152d9b164e26?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2340&q=80'
-                        height='130'
-                        mb='100'
-                        sx={{ borderRadius: ".25rem", boxShadow: '0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%)' }} />
-                    <CardContent sx={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
-                        <Typography variant="h1" sx={{
-                            fontFamily: "'Exo 2', 'sans-serif'",
-                            fontWeight: '800',
-                            fontSize: '2.5rem',
-                            background: "-webkit-linear-gradient(45deg, #FFF 50%, #000 55%)",
-                            WebkitBackgroundClip: "text",
-                            WebkitTextFillColor: "transparent"
-                        }}>
-                            {movie.title}
-                        </Typography>
-                    </CardContent>
-                </Card >
-
+                <Box width="80%" margin="auto">
+                    <Card sx={{ mb: '1.5rem', position: 'relative' }}>
+                        <CardMedia
+                            component='img'
+                            image='https://images.unsplash.com/photo-1478720568477-152d9b164e26?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2340&q=80'
+                            height='130'
+                            mb='100'
+                            sx={{ borderRadius: ".25rem", boxShadow: '0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%)' }} />
+                        <CardContent sx={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
+                            <Typography noWrap variant="h1" sx={{
+                                fontFamily: "'Exo 2', 'sans-serif'",
+                                fontWeight: '800',
+                                fontSize: '2rem',
+                                background: "-webkit-linear-gradient(45deg, #FFF 50%, #000 55%)",
+                                WebkitBackgroundClip: "text",
+                                WebkitTextFillColor: "transparent"
+                            }}>
+                                {movie.title} ({movie.year})
+                            </Typography>
+                        </CardContent>
+                    </Card>
+                    <Card sx={{ flexGrow: 1, boxShadow: "none" }}>
+                        <Grid container>
+                            <Grid item xs={3} sx={{ ...cardStyles, backgroundColor: "#ec407a", opacity: ".65" }}>
+                                <CardMedia
+                                    sx={{ ...iconStyles, backgroundPosition: "-0 -50px" }}
+                                />
+                                <Typography sx={{ ...typographyStyles }}>INFORMATION</Typography>
+                            </Grid>
+                            <Grid item xs sx={{ ...cardStyles }}>
+                                <CardMedia
+                                    sx={{ ...iconStyles, backgroundPosition: "-0 -0" }}
+                                />
+                                <Typography sx={{ ...typographyStyles }}>FULL CASTS</Typography>
+                            </Grid>
+                            <Grid item xs sx={{ ...cardStyles }}>
+                                <CardMedia
+                                    sx={{ ...iconStyles, backgroundPosition: "-50px -50px" }}
+                                />
+                                <Typography sx={{ ...typographyStyles }}>POSTERS</Typography>
+                            </Grid>
+                            <Grid item xs sx={{ ...cardStyles }}>
+                                <CardMedia
+                                    sx={{ ...iconStyles, background: "url(https://imdb-api.com/img/icons/images.png) no-repeat" }}
+                                />
+                                <Typography sx={{ ...typographyStyles }}>IMAGES</Typography>
+                            </Grid>
+                            <Grid item xs sx={{ ...cardStyles }}>
+                                <CardMedia
+                                    sx={{ ...iconStyles, backgroundPosition: "-0 -150px" }}
+                                />
+                                <Typography sx={{ ...typographyStyles }}>TRAILER</Typography>
+                            </Grid>
+                            <Grid item xs sx={{ ...cardStyles }}>
+                                <CardMedia
+                                    sx={{ ...iconStyles, backgroundPosition: "-0 -100px" }}
+                                />
+                                <Typography sx={{ ...typographyStyles }}>REPORT</Typography>
+                            </Grid>
+                        </Grid>
+                    </Card>
+                    <hr style={{ margin: "1rem 0", border: "0", borderTop: "1px solid rgba(0,0,0,.1)" }} />
+                </Box>
             </> : <></>
             }
-
         </>
     );
 }

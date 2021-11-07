@@ -36,7 +36,7 @@ const Homepage = () => {
                         mb='100'
                         sx={{ borderRadius: ".25rem", boxShadow: '0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%)' }} />
                     <CardContent sx={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
-                        <Typography variant="h1" sx={{
+                        <Typography noWrap variant="h1" sx={{
                             fontFamily: "'Exo 2', 'sans-serif'",
                             fontWeight: '800',
                             fontSize: '3.5rem',
@@ -77,9 +77,9 @@ const Homepage = () => {
                                             sx={{ '&': { maxWidth: "100%", height: "auto", borderRadius: ".25rem", borderBox: 'box-sizing', objectFit: 'contain', transition: 'all 0.3s linear' }, '&:hover': { transform: 'scale(1.1)' } }}
                                         ></CardMedia>
                                     </TableCell>
-                                    <Link to={`/MovieDetail/${movie.rank}`}>
-                                        <TableCell align="center" sx={{ fontWeight: 'bold' }} >{movie.title}</TableCell>
-                                    </Link>
+                                    <TableCell align="center" sx={{ fontWeight: 'bold' }}>
+                                        <Link to={`/MovieDetail/${movie.rank}`} sx={{ textDecoration: "none" }}>{movie.title}</Link>
+                                    </TableCell>
                                     <TableCell align="center">{movie.year}</TableCell>
                                     <TableCell align="center" sx={{ fontWeight: 'light' }}>{movie.crew}</TableCell>
                                     <TableCell alidn='center' >

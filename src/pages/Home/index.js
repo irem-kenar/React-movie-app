@@ -13,13 +13,10 @@ import StarRateRoundedIcon from '@mui/icons-material/StarRateRounded';
 import { CardMedia, CardContent, Card, Typography, Box } from "@mui/material";
 import { Link } from "react-router-dom";
 
-
-
 const Homepage = () => {
     const dispatch = useDispatch();
     const movieData = useSelector(getMovieDataSelector);
     const movieLoaded = useSelector(getMovieLoadedSelector);
-
     const loadMovie = () => {
         dispatch(movieActions.loadMovieApiAction());
     }

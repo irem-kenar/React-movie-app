@@ -1,11 +1,13 @@
 import { React, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { movieActions } from "../../shared/store/actions/movie.action";
+import { movieInformationActions } from "../../shared/store/actions/movieInformation.action";
 import { getMovieDataSelector, getMovieLoadedSelector } from "../../shared/store/selectors/movie.selector";
+import { getMovieInformationSelector, getMovieInformationLoadedSelector } from "../../shared/store/selectors/movieInformation.selector";
+import Information from "../../components/Information";
 import { CardMedia, CardContent, Card, Typography, } from "@mui/material";
 import Grid from '@mui/material/Grid';
 import { Box } from "@mui/material";
-
 
 
 const MovieDetail = (props) => {
@@ -15,16 +17,20 @@ const MovieDetail = (props) => {
     const dispatch = useDispatch();
     const movieData = useSelector(getMovieDataSelector);
     const movieLoaded = useSelector(getMovieLoadedSelector);
+    const movieInformation = useSelector(getMovieInformationSelector);
+    const movieInformationLoaded = useSelector(getMovieInformationLoadedSelector);
 
     const loadMovie = () => {
         dispatch(movieActions.loadMovieApiAction());
+        dispatch(movieInformationActions.loadMovieInformationApiAction());
+
     }
 
-    const getMovieTitle = (props) => {
+    const getMovieInformation = (props) => {
         return (movieData ? movieData.items.filter(movie => movie.rank === props.match.params.id)[0] : "")
     }
 
-    const movie = getMovieTitle(props);
+    const movie = getMovieInformation(props);
     const cardStyles = {
         width: "146px",
         height: "146px",
@@ -46,13 +52,14 @@ const MovieDetail = (props) => {
         height: '50px',
         width: '50px',
         display: "inline-block",
-        mt: "1.5rem"
+        mt: "1.5rem",
+        border: "none"
     }
 
     return (
 
         <>
-            {movieLoaded ? <>
+            {movieLoaded && movieInformationLoaded ? <>
                 <Box width="80%" margin="auto">
                     <Card sx={{ mb: '1.5rem', position: 'relative' }}>
                         <CardMedia
@@ -76,25 +83,25 @@ const MovieDetail = (props) => {
                     </Card>
                     <Card sx={{ flexGrow: 1, boxShadow: "none" }}>
                         <Grid container>
-                            <Grid item xs={3} sx={{ ...cardStyles, backgroundColor: "#ec407a", opacity: ".65" }}>
+                            <Grid item md={3} sx={{ ...cardStyles, backgroundColor: "#ec407a", opacity: ".65" }}>
                                 <CardMedia
                                     sx={{ ...iconStyles, backgroundPosition: "-0 -50px" }}
                                 />
                                 <Typography sx={{ ...typographyStyles }}>INFORMATION</Typography>
                             </Grid>
-                            <Grid item xs sx={{ ...cardStyles }}>
+                            <Grid item md sx={{ ...cardStyles }}>
                                 <CardMedia
                                     sx={{ ...iconStyles, backgroundPosition: "-0 -0" }}
                                 />
                                 <Typography sx={{ ...typographyStyles }}>FULL CASTS</Typography>
                             </Grid>
-                            <Grid item xs sx={{ ...cardStyles }}>
+                            <Grid item md sx={{ ...cardStyles }}>
                                 <CardMedia
                                     sx={{ ...iconStyles, backgroundPosition: "-50px -50px" }}
                                 />
                                 <Typography sx={{ ...typographyStyles }}>POSTERS</Typography>
                             </Grid>
-                            <Grid item xs sx={{ ...cardStyles }}>
+                            <Grid item md sx={{ ...cardStyles }}>
                                 <CardMedia
                                     sx={{ ...iconStyles, background: "url(https://imdb-api.com/img/icons/images.png) no-repeat" }}
                                 />
@@ -115,6 +122,7 @@ const MovieDetail = (props) => {
                         </Grid>
                     </Card>
                     <hr style={{ margin: "1rem 0", border: "0", borderTop: "1px solid rgba(0,0,0,.1)" }} />
+                    <Information movie={movie} movieInformation={movieInformation} />
                 </Box>
             </> : <></>
             }

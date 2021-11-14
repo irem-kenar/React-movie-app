@@ -4,11 +4,13 @@ import LocalStorageService from "./localStorage.service";
 
 
 const baseUrl =
-    "https://imdb-api.com/API/Top250Movies/";
+    "https://imdb-api.com/en/API/Title/";
 const API_KEY = "k_oyuj035r";
+const options = "FullActor,FullCast,Images,Ratings,";
+const id = "tt1375666";
 
-const getMovieData = async () => {
-    const response = await axios.get(`${baseUrl}${API_KEY}`);
+const getMovieInformationData = async () => {
+    const response = await axios.get(`${baseUrl}${API_KEY}/${id}/${options}`);
     return response;
 };
 // LocalstorageService
@@ -62,4 +64,4 @@ axios.interceptors.response.use((response) => {
 });
 
 
-export default getMovieData;
+export default getMovieInformationData;

@@ -48,7 +48,7 @@ const Homepage = () => {
                 <TableContainer component={Paper}>
                     <Table align="center" sx={{ minWidth: 650, width: '80%' }} aria-label="simple table">
                         <TableHead>
-                            <TableRow sx={{ backgroundColor: "#2bbbad", height: "60px", '&:nth-child(1) th': { fontFamily: "'Exo 2', 'sans-serif'", color: "#fff", fontWeight: "800", textTransform: "uppercase" } }}>
+                            <TableRow sx={{ backgroundColor: "#2bbbad", height: "60px", '&:nth-of-type(1) th': { fontFamily: "'Exo 2', 'sans-serif'", color: "#fff", fontWeight: "800", textTransform: "uppercase" } }}>
                                 <TableCell align="center">Rank</TableCell>
                                 <TableCell align="center">Image</TableCell>
                                 <TableCell align="center">Title</TableCell>

@@ -14,13 +14,48 @@ import Cast from "../Cast";
 
 const Information = ({ movie, movieInformation }) => {
 
+    const tableHeaderClass = {
+        backgroundColor: '#343a40',
+        borderColor: '#454d55',
+        border: '1px solid #dee2e6',
+        '&>th, th>td': {
+            fontFamily: "'Exo 2', 'sans-serif'",
+            fontWeight: '800',
+            color: '#fff',
+            border: '1px solid #dee2e6',
+
+        }
+    }
+
+    const tableRowClass = {
+        'td': {
+            fontFamily: "'Exo 2', 'sans-serif'",
+            border: '1px solid #dee2e6',
+        },
+        'td>span': {
+            fontWeight: '800',
+        }
+    }
+    const invisibleCell = {
+        backgroundColor: '#fff !important',
+        border: 'none !important',
+    }
+
+
     const ratingCardStyles = {
         display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
         flexDirection: 'row',
+        flexWrap: 'nowrap',
         backgroundColor: '#bdbdbd',
         borderRadius: '0',
         mt: '20px',
-        padding: '10px'
+        padding: '10px',
+        '&>p': {
+            fontFamily: "'Exo 2', 'sans-serif'", fontSize: '1.5rem', fontWeight: '800', display: 'flex', gap: '5px', justifyContent: 'center', alignItems: 'center'
+        },
+        'p>span': { fontSize: '1rem', fontWeight: '300', mt: '5px' }
     }
 
     const directors = [movieInformation.directors];
@@ -39,11 +74,11 @@ const Information = ({ movie, movieInformation }) => {
 
                 </Grid>
                 <Grid item xs={8}>
-                    <Typography>
-                        {movie.title} ({movie.year})
+                    <Typography sx={{ fontFamily: "'Exo 2', 'sans-serif'", fontSize: '2rem', fontWeight: '900' }}>
+                        {movie.title} <span style={{ fontSize: '2rem', fontWeight: '300' }}>({movie.year})</span>
                     </Typography>
                     <hr />
-                    <Typography>
+                    <Typography sx={{ fontFamily: "'Exo 2', 'sans-serif'", fontWeight: 'normal' }}>
                         {movieInformation.plot}
                         We have plot here
                     </Typography>
@@ -61,14 +96,14 @@ const Information = ({ movie, movieInformation }) => {
                                 height="52"
                                 width="52"
                                 sx={{ borderBox: 'box-sizing', objectFit: 'contain', borderRadius: ".25rem" }} />
-                            <Typography>{movieInformation.imDbRating} </Typography>
+                            <Typography>{movieInformation.imDbRating} <span>/10</span></Typography>
                             <CardMedia
                                 component='img'
                                 src="https://imdb-api.com/img/icons/Metacritic.png"
                                 height="52"
                                 width="52"
                                 sx={{ borderBox: 'box-sizing', objectFit: 'contain', borderRadius: ".25rem" }} />
-                            <Typography>{movieInformation.metacriticRating} </Typography>
+                            <Typography>{movieInformation.metacriticRating} <span>%</span></Typography>
                         </Card>
                         <Card sx={{ ...ratingCardStyles }}>
                             <CardMedia
@@ -77,7 +112,7 @@ const Information = ({ movie, movieInformation }) => {
                                 height="52"
                                 width="52"
                                 sx={{ borderBox: 'box-sizing', objectFit: 'contain', borderRadius: ".25rem" }} />
-                            <Typography>{movieInformation.ratings.theMovieDb} </Typography>
+                            <Typography>{movieInformation.ratings.theMovieDb} <span>/10</span> </Typography>
                             <CardMedia
                                 component='img'
                                 src="https://imdb-api.com/img/icons/RottenTomatoes.png"
@@ -91,14 +126,14 @@ const Information = ({ movie, movieInformation }) => {
                                 height="52"
                                 width="52"
                                 sx={{ borderBox: 'box-sizing', objectFit: 'contain', borderRadius: ".25rem" }} />
-                            <Typography>{movieInformation.ratings.filmAffinity} </Typography>
+                            <Typography>{movieInformation.ratings.filmAffinity} <span>/10</span></Typography>
                         </Card>
                     </Box>
                     <Grid item xs={12} mt={5}>
                         <TableContainer component={Paper} >
                             <Table align="center">
-                                <TableHead>
-                                    <TableRow>
+                                <TableHead >
+                                    <TableRow sx={{ ...tableHeaderClass }}>
                                         <TableCell align="center" colSpan={2}>
                                             CREATORS
                                         </TableCell>
@@ -108,104 +143,104 @@ const Information = ({ movie, movieInformation }) => {
                                     </TableRow>
                                 </TableHead>
                                 <TableBody sx={{ 'tr:nth-of-type(odd)': { backgroundColor: "rgba(0,0,0,.05)" } }}>
-                                    <TableRow>
+                                    <TableRow sx={{ ...tableRowClass }}>
                                         <TableCell align="left">
                                             Director
                                         </TableCell>
                                         <TableCell align="left">
-                                            {movieInformation.directors}
+                                            <span>{movieInformation.directors}</span>
                                         </TableCell>
                                         <TableCell align="left">
-                                            Release Date
+                                            <span>Release Date</span>
                                         </TableCell>
                                         <TableCell align="left">
                                             {movieInformation.releaseDate}
                                         </TableCell>
                                     </TableRow>
-                                    <TableRow >
+                                    <TableRow sx={{ ...tableRowClass, border: '1px solid #dee2e6' }}>
                                         <TableCell align="left">
                                             Writer
                                         </TableCell>
                                         <TableCell align="left">
-                                            {movieInformation.writers}
+                                            <span>{movieInformation.writers}</span>
                                         </TableCell>
                                         <TableCell align="left">
-                                            Runtime
+                                            <span>Runtime</span>
                                         </TableCell>
                                         <TableCell align="left">
                                             {movieInformation.runtimeStr}
                                         </TableCell>
                                     </TableRow>
-                                    <TableRow>
+                                    <TableRow sx={{ ...tableRowClass }}>
                                         <TableCell align="left">
                                             Writer
                                         </TableCell>
                                         <TableCell align="left">
-                                            Writer Info
+                                            <span>Writer Info</span>
                                         </TableCell>
                                         <TableCell align="left">
-                                            Genre
+                                            <span>Genre</span>
                                         </TableCell>
                                         <TableCell align="left">
                                             {movieInformation.genres}
                                         </TableCell>
                                     </TableRow>
-                                    <TableRow>
-                                        <TableCell align="left">
+                                    <TableRow sx={{ ...tableRowClass }}>
+                                        <TableCell align="left" sx={{ ...invisibleCell }}>
                                         </TableCell>
-                                        <TableCell align="left">
+                                        <TableCell align="left" sx={{ ...invisibleCell }}>
                                         </TableCell>
                                         {/* <TableCell rowSpan={5} /> */}
                                         <TableCell align="left">
-                                            Content Rating
+                                            <span>Content Rating</span>
                                         </TableCell>
                                         <TableCell align="left">
                                             {movieInformation.contentRating}
                                         </TableCell>
                                     </TableRow>
-                                    <TableRow>
-                                        <TableCell align="left">
+                                    <TableRow sx={{ ...tableRowClass }}>
+                                        <TableCell align="left" sx={{ ...invisibleCell }}>
+                                        </TableCell>
+                                        <TableCell align="left" sx={{ ...invisibleCell }}>
                                         </TableCell>
                                         <TableCell align="left">
-                                        </TableCell>
-                                        <TableCell align="left">
-                                            Awards
+                                            <span>Awards</span>
                                         </TableCell>
                                         <TableCell align="left">
                                             {movieInformation.awards}
                                         </TableCell>
                                     </TableRow>
-                                    <TableRow>
-                                        <TableCell align="left">
+                                    <TableRow sx={{ ...tableRowClass }}>
+                                        <TableCell align="left" sx={{ ...invisibleCell }}>
+                                        </TableCell>
+                                        <TableCell align="left" sx={{ ...invisibleCell }}>
                                         </TableCell>
                                         <TableCell align="left">
-                                        </TableCell>
-                                        <TableCell align="left">
-                                            Country Rating
+                                            <span>Country Rating</span>
                                         </TableCell>
                                         <TableCell align="left">
                                             {movieInformation.countries}
                                         </TableCell>
                                     </TableRow>
-                                    <TableRow>
-                                        <TableCell align="left">
+                                    <TableRow sx={{ ...tableRowClass }}>
+                                        <TableCell align="left" sx={{ ...invisibleCell }}>
+                                        </TableCell>
+                                        <TableCell align="left" sx={{ ...invisibleCell }}>
                                         </TableCell>
                                         <TableCell align="left">
-                                        </TableCell>
-                                        <TableCell align="left">
-                                            Company Rating
+                                            <span>Company Rating</span>
                                         </TableCell>
                                         <TableCell align="left">
                                             {movieInformation.companies}
                                         </TableCell>
                                     </TableRow>
-                                    <TableRow>
-                                        <TableCell align="left">
+                                    <TableRow sx={{ ...tableRowClass }}>
+                                        <TableCell align="left" sx={{ ...invisibleCell }}>
+                                        </TableCell>
+                                        <TableCell align="left" sx={{ ...invisibleCell }}>
                                         </TableCell>
                                         <TableCell align="left">
-                                        </TableCell>
-                                        <TableCell align="left">
-                                            Language Rating
+                                            <span>Language Rating</span>
                                         </TableCell>
                                         <TableCell align="left">
                                             {movieInformation.languages}

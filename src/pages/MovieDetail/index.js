@@ -22,12 +22,11 @@ const MovieDetail = (props) => {
 
     const loadMovie = () => {
         dispatch(movieActions.loadMovieApiAction());
-        dispatch(movieInformationActions.loadMovieInformationApiAction());
-
+        dispatch(movieInformationActions.loadMovieInformationApiAction(movie.id));
     }
 
     const getMovieInformation = (props) => {
-        return (movieData ? movieData.items.filter(movie => movie.rank === props.match.params.id)[0] : "")
+        return (movieData ? movieData.items.filter(movie => movie.id === props.match.params.id)[0] : "")
     }
 
     const movie = getMovieInformation(props);

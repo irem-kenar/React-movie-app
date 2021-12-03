@@ -75,7 +75,7 @@ const Homepage = () => {
                                         ></CardMedia>
                                     </TableCell>
                                     <TableCell align="center" sx={{ fontWeight: 'bold' }}>
-                                        <Link to={`/MovieDetail/${movie.rank}`} sx={{ textDecoration: "none" }}>{movie.title}</Link>
+                                        <Link to={`/MovieDetail/${movie.id}`} style={{ textDecoration: "none", color: "#212529" }}>{movie.title}</Link>
                                     </TableCell>
                                     <TableCell align="center">{movie.year}</TableCell>
                                     <TableCell align="center" sx={{ fontWeight: 'light' }}>{movie.crew}</TableCell>

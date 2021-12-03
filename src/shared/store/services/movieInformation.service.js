@@ -7,9 +7,9 @@ const baseUrl =
     "https://imdb-api.com/en/API/Title/";
 const API_KEY = "k_oyuj035r";
 const options = "FullActor,FullCast,Images,Ratings,";
-const id = "tt1375666";
+//const id = "tt1375666";
 
-const getMovieInformationData = async () => {
+const getMovieInformationData = async (id) => {
     const response = await axios.get(`${baseUrl}${API_KEY}/${id}/${options}`);
     return response;
 };

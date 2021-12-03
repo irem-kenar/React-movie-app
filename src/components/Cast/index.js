@@ -7,7 +7,7 @@ const Cast = ({ movieInformation }) => {
     const cardStyles = {
         border: '1px solid #dee2e6',
         boxSizing: 'border-box',
-        p: '20px'
+        p: '20px',
     }
 
     const castStyles = {
@@ -19,9 +19,9 @@ const Cast = ({ movieInformation }) => {
     return (
         <>
             <Box>
-                <Grid container spacing={2} mt={10}>
-                    {actor.map(actor =>
-                        <Grid item xs={4}>
+                <Grid container spacing={2} mt={2}>
+                    {actor.slice(0, 15).map(actor =>
+                        <Grid item xl={2} md={4} lg={2}>
                             <Card sx={{ ...cardStyles }}>
                                 <CardMedia
                                     component='img'
@@ -29,7 +29,7 @@ const Cast = ({ movieInformation }) => {
                                     height='176'
                                     width='128'
                                     p='10'
-                                    sx={{ borderBox: 'box-sizing', objectFit: 'contain', borderRadius: ".25rem !important", aspectRatio: "auto 128 / 176" }}
+                                    sx={{ borderBox: 'box-sizing', objectFit: 'contain', borderRadius: ".25rem" }}
                                 />
                                 <CardContent >
                                     <Typography variant="p" align='center' display='block' sx={{ ...castStyles, fontWeight: 'bold' }}>

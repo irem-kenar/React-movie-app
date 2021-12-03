@@ -5,13 +5,17 @@ import App from './App';
 import { Provider } from 'react-redux';
 import store from './shared/store';
 import reportWebVitals from './reportWebVitals';
+import { Suspense } from 'react';
+import './i18n';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
-  </React.StrictMode>,
+    <Suspense fallback={<div>Loading...</div>}>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </Suspense>
+  </React.StrictMode >,
   document.getElementById('root')
 );
 

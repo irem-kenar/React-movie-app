@@ -12,6 +12,7 @@ import Paper from '@mui/material/Paper';
 import StarRateRoundedIcon from '@mui/icons-material/StarRateRounded';
 import { CardMedia, CardContent, Card, Typography, Box } from "@mui/material";
 import { Link } from "react-router-dom";
+import { Trans, useTranslation } from "react-i18next";
 
 const Homepage = () => {
     const dispatch = useDispatch();
@@ -21,10 +22,19 @@ const Homepage = () => {
         dispatch(movieActions.loadMovieApiAction());
     }
 
+    //Translation
+    const { t, i18n } = useTranslation();
+
+    const changeLanguage = (language) => {
+        i18n.changeLanguage(language);
+    };
+
     return (
         <>
             <button onClick={loadMovie}>Show me top 250 movies</button>
             {movieLoaded ? <>
+                <button onClick={() => changeLanguage("en")}>EN</button>
+                <button onClick={() => changeLanguage("tr")}>TR</button>
                 <Card sx={{ width: '80%', margin: 'auto', mb: '1.5rem', position: 'relative' }}>
                     <CardMedia
                         component='img'
@@ -49,12 +59,16 @@ const Homepage = () => {
                     <Table align="center" sx={{ minWidth: 650, width: '80%' }} aria-label="simple table">
                         <TableHead>
                             <TableRow sx={{ backgroundColor: "#2bbbad", height: "60px", '&:nth-of-type(1) th': { fontFamily: "'Exo 2', 'sans-serif'", color: "#fff", fontWeight: "800", textTransform: "uppercase" } }}>
-                                <TableCell align="center">Rank</TableCell>
-                                <TableCell align="center">Image</TableCell>
-                                <TableCell align="center">Title</TableCell>
-                                <TableCell align="center">Year</TableCell>
-                                <TableCell align="center">Cast</TableCell>
-                                <TableCell align="center">IMDB Rating</TableCell>
+                                <TableCell align="center">{t("rank")} </TableCell>
+                                <TableCell align="center">
+                                    <Trans i18nKey="image">
+                                        Image
+                                    </Trans>
+                                </TableCell>
+                                <TableCell align="center">{t("title")}</TableCell>
+                                <TableCell align="center">{t("year")}</TableCell>
+                                <TableCell align="center">{t("cast")}</TableCell>
+                                <TableCell align="center">{t("imdbRating")}</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>

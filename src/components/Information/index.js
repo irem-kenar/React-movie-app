@@ -26,7 +26,6 @@ const Information = ({ movie, movieInformation }) => {
 
         }
     }
-
     const tableRowClass = {
         'td': {
             fontFamily: "'Exo 2', 'sans-serif'",

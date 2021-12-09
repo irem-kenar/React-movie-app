@@ -21,7 +21,7 @@ const Cast = ({ movieInformation }) => {
             <Box>
                 <Grid container spacing={2} mt={2}>
                     {actor.slice(0, 15).map(actor =>
-                        <Grid item xl={2} md={4} lg={2}>
+                        <Grid key={actor.id} item xl={2} md={4} lg={2}>
                             <Card sx={{ ...cardStyles }}>
                                 <CardMedia
                                     component='img'

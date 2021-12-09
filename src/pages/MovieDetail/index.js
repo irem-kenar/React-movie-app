@@ -8,12 +8,14 @@ import Information from "../../components/Information";
 import { CardMedia, CardContent, Card, Typography, } from "@mui/material";
 import Grid from '@mui/material/Grid';
 import { Box } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 
 const MovieDetail = (props) => {
     useEffect(() => {
         loadMovie();
     }, [])
+    console.log(props)
     const dispatch = useDispatch();
     const movieData = useSelector(getMovieDataSelector);
     const movieLoaded = useSelector(getMovieLoadedSelector);
@@ -22,8 +24,9 @@ const MovieDetail = (props) => {
 
     const loadMovie = () => {
         dispatch(movieActions.loadMovieApiAction());
-        dispatch(movieInformationActions.loadMovieInformationApiAction(movie.id));
+        dispatch(movieInformationActions.loadMovieInformationApiAction(movie.id, i18n.language));
     }
+
 
     const getMovieInformation = (props) => {
         return (movieData ? movieData.items.filter(movie => movie.id === props.match.params.id)[0] : "")
@@ -55,10 +58,19 @@ const MovieDetail = (props) => {
         border: "none"
     }
 
+    const { t, i18n } = useTranslation();
+
+    const changeLanguage = (language) => {
+        i18n.changeLanguage(language);
+    };
+
+
     return (
 
         <>
             {movieLoaded && movieInformationLoaded ? <>
+                <button onClick={() => changeLanguage("en")}>EN</button>
+                <button onClick={() => changeLanguage("tr")}>TR</button>
                 <Box width="80%" margin="auto">
                     <Card sx={{ mb: '1.5rem', position: 'relative' }}>
                         <CardMedia
@@ -84,36 +96,42 @@ const MovieDetail = (props) => {
                         <Grid container>
                             <Grid item md={3} sx={{ ...cardStyles, backgroundColor: "#ec407a", opacity: ".65" }}>
                                 <CardMedia
+                                    component='img'
                                     sx={{ ...iconStyles, backgroundPosition: "-0 -50px" }}
                                 />
                                 <Typography sx={{ ...typographyStyles }}>INFORMATION</Typography>
                             </Grid>
                             <Grid item md sx={{ ...cardStyles }}>
                                 <CardMedia
+                                    component='img'
                                     sx={{ ...iconStyles, backgroundPosition: "-0 -0" }}
                                 />
                                 <Typography sx={{ ...typographyStyles }}>FULL CASTS</Typography>
                             </Grid>
                             <Grid item md sx={{ ...cardStyles }}>
                                 <CardMedia
+                                    component='img'
                                     sx={{ ...iconStyles, backgroundPosition: "-50px -50px" }}
                                 />
                                 <Typography sx={{ ...typographyStyles }}>POSTERS</Typography>
                             </Grid>
                             <Grid item md sx={{ ...cardStyles }}>
                                 <CardMedia
+                                    component='img'
                                     sx={{ ...iconStyles, background: "url(https://imdb-api.com/img/icons/images.png) no-repeat" }}
                                 />
                                 <Typography sx={{ ...typographyStyles }}>IMAGES</Typography>
                             </Grid>
                             <Grid item xs sx={{ ...cardStyles }}>
                                 <CardMedia
+                                    component='img'
                                     sx={{ ...iconStyles, backgroundPosition: "-0 -150px" }}
                                 />
                                 <Typography sx={{ ...typographyStyles }}>TRAILER</Typography>
                             </Grid>
                             <Grid item xs sx={{ ...cardStyles }}>
                                 <CardMedia
+                                    component='img'
                                     sx={{ ...iconStyles, backgroundPosition: "-0 -100px" }}
                                 />
                                 <Typography sx={{ ...typographyStyles }}>REPORT</Typography>
@@ -121,7 +139,7 @@ const MovieDetail = (props) => {
                         </Grid>
                     </Card>
                     <hr style={{ margin: "1rem 0", border: "0", borderTop: "1px solid rgba(0,0,0,.1)" }} />
-                    <Information movie={movie} movieInformation={movieInformation} />
+                    <Information props={props} movie={movie} movieInformation={movieInformation} />
                 </Box>
             </> : <></>
             }

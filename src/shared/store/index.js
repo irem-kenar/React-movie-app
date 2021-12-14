@@ -7,7 +7,6 @@ import mySaga from "./sagas";
 
 // create the saga middleware
 const sagaMiddleware = createSagaMiddleware();
-//is this necessary?
 const middleware = [sagaMiddleware];
 
 // mount it on the Store

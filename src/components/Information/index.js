@@ -1,5 +1,5 @@
-import { React, useEffect } from "react";
-import { CardMedia, CardContent, Card, Typography, } from "@mui/material";
+import { React } from "react";
+import { CardMedia, Card, Typography, } from "@mui/material";
 import Grid from '@mui/material/Grid';
 import { Box } from "@mui/material";
 import Table from '@mui/material/Table';
@@ -10,9 +10,10 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Cast from "../Cast";
+import { useTranslation } from "react-i18next";
 
 
-const Information = ({ movie, movieInformation }) => {
+const Information = ({ movie, movieInformation, movieInformationLoaded }) => {
 
     const tableHeaderClass = {
         backgroundColor: '#343a40',
@@ -62,15 +63,20 @@ const Information = ({ movie, movieInformation }) => {
         fontFamily: "'Exo 2', 'sans-serif'",
         fontSize: '1.5rem',
         fontWeight: '800'
-
     }
 
-    const directors = movieInformation.directorList.map(director => director.name);
-    const writers = movieInformation.writerList.map(writer => writer.name);
+    const { t } = useTranslation();
+
+    const directors = !!movieInformation.directorList ? movieInformation.directorList.map(director => director.name) : '';
+    const writers = !!movieInformation.writerList ? movieInformation.writerList.map(writer => writer.name) : '';
+
+    if (Object.keys(movieInformation).length < 1) {
+        return (<div>Loading...</div>);
+    }
 
     return (
         <>
-            {movieInformation ? <>
+            {movieInformation && movieInformationLoaded ? <>
                 <Grid container>
                     <Grid item lg={4} sm={12}>
                         <CardMedia
@@ -87,7 +93,7 @@ const Information = ({ movie, movieInformation }) => {
                         </Typography>
                         <hr />
                         <Typography sx={{ fontFamily: "'Exo 2', 'sans-serif'", fontWeight: 'normal' }}>
-                            {movieInformation.plot}
+                            {movieInformation.plotLocal || movieInformation.plot}
                         </Typography>
                         <Box >
                             <Card sx={{ ...ratingCardStyles }}>
@@ -199,7 +205,7 @@ const Information = ({ movie, movieInformation }) => {
                                             </TableCell>
                                             {/* <TableCell rowSpan={5} /> */}
                                             <TableCell align="left">
-                                                <span>Content Rating</span>
+                                                <span>Content</span>
                                             </TableCell>
                                             <TableCell align="left">
                                                 {movieInformation.contentRating}
@@ -223,7 +229,7 @@ const Information = ({ movie, movieInformation }) => {
                                             <TableCell align="left" sx={{ ...invisibleCell }}>
                                             </TableCell>
                                             <TableCell align="left">
-                                                <span>Country Rating</span>
+                                                <span>{t("country")}</span>
                                             </TableCell>
                                             <TableCell align="left">
                                                 {movieInformation.countries}
@@ -235,7 +241,7 @@ const Information = ({ movie, movieInformation }) => {
                                             <TableCell align="left" sx={{ ...invisibleCell }}>
                                             </TableCell>
                                             <TableCell align="left">
-                                                <span>Company Rating</span>
+                                                <span>Company</span>
                                             </TableCell>
                                             <TableCell align="left">
                                                 {movieInformation.companies}
@@ -247,7 +253,7 @@ const Information = ({ movie, movieInformation }) => {
                                             <TableCell align="left" sx={{ ...invisibleCell }}>
                                             </TableCell>
                                             <TableCell align="left">
-                                                <span>Language Rating</span>
+                                                <span>{t("languages")}</span>
                                             </TableCell>
                                             <TableCell align="left">
                                                 {movieInformation.languages}

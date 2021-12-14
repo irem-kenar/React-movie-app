@@ -4,5 +4,7 @@
     "title": "Adı",
     "year": "Yapım Yılı",
     "cast": "Oyuncular",
-    "imdbRating": "IMDB Puanı"
+    "imdbRating": "IMDB Puanı",
+    "languages" : "Diller",
+    "country" : "Ülke"
 }

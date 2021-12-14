@@ -4,5 +4,7 @@
     "title": "Title",
     "year": "Year",
     "cast": "Cast",
-    "imdbRating": "IMDB Rating"
+    "imdbRating": "IMDB Rating",
+    "languages" : "Language Rating",
+    "country" : "Country"
 }

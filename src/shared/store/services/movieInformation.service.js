@@ -6,11 +6,13 @@ import LocalStorageService from "./localStorage.service";
 const baseUrl =
     "https://imdb-api.com/";
 const options_1 = "/API/Title/"
-const API_KEY = "k_oyuj035r";
+//const API_KEY = "k_oyuj035r";
+const API_KEY = "k_nkqi1hdr";
 const options_2 = "FullActor,FullCast,Images,Ratings,";
 //const id = "tt1375666";
 
-const getMovieInformationData = async (id, lang) => {
+const getMovieInformationData = async (id) => {
+    const lang = localStorage.getItem('i18nextLng');
     const response = await axios.get(`${baseUrl}${lang}${options_1}${API_KEY}/${id}/${options_2}`);
     return response;
 };

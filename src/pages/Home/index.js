@@ -1,4 +1,3 @@
-import { React } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { movieActions } from "../../shared/store/actions/movie.action";
 import { getMovieDataSelector, getMovieLoadedSelector } from "../../shared/store/selectors/movie.selector";

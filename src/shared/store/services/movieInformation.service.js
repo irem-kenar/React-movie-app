@@ -9,7 +9,6 @@ const options_1 = "/API/Title/"
 const API_KEY = process.env.REACT_APP_MOVIE_API_KEY;
 const options_2 = "FullActor,FullCast,Images,Ratings,";
 //const id = "tt1375666";
-console.log("hi",process.env.REACT_APP_MOVIE_API_KEY)
 
 const getMovieInformationData = async (id) => {
     const lang = localStorage.getItem('i18nextLng');

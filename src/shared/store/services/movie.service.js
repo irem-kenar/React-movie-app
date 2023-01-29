@@ -6,7 +6,8 @@ import LocalStorageService from "./localStorage.service";
 const baseUrl =
     "https://imdb-api.com/API/Top250Movies/";
 
-const API_KEY = process.env.API_KEY;
+const API_KEY = process.env.REACT_APP_MOVIE_API_KEY;
+console.log(process.env.REACT_APP_MOVIE_API_KEY)
 
 const getMovieData = async () => {
     const response = await axios.get(`${baseUrl}${API_KEY}`);
